@@ -12,6 +12,7 @@ export const Container_Experience = styled.section`
 
   .container-empresa {
     display: flex;
+    object-fit: contain;
     img {
       width: 30rem;
       margin: 0 0 0 2rem;
