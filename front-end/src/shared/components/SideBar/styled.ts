@@ -39,6 +39,7 @@ export const Container_Sidebar = styled.section`
     label {
       font-size: 2rem;
       color: #e8e8e8;
+      cursor: pointer;
     }
   }
 `;
