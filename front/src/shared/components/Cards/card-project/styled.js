@@ -1,10 +1,8 @@
 import styled from "styled-components";
 
-interface ICardProjectProps {
-  finalizado: boolean;
-}
 
-export const C_CardProject = styled.div<ICardProjectProps>`
+
+export const C_CardProject = styled.div`
   border-radius: 0.5rem;
   box-shadow: 0.7rem 0.7rem 1.3rem 0 rgba(50, 50, 50, 0.22);
   padding: 0.5rem 0 3rem 0;
