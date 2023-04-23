@@ -19,6 +19,7 @@ Foi utilizado as seguintes dependencias abaixo:
 - <strong>styled-components</strong>
 - <strong>react-modal</strong>
 - <strong>formik + yup</strong>
+- <strong>Hooks</strong>
 
 Sempre me propus a aprender e estudar para alcançar os objetivos na minha vida profissional, entrando de cabeça e focando no aprendizado.
 
