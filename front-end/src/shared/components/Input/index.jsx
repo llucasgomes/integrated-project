@@ -23,7 +23,7 @@ export const Input = ({
         {required && <RequiredLabel>*</RequiredLabel>}
       </Label>
       <Field
-        as={name == "subject" ? FieldStyledT : FieldStyled}
+        as={name == "descricao" ? FieldStyledT : FieldStyled}
         name={name}
         type={type}
         list={label}
