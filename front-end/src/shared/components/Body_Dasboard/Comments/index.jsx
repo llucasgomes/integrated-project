@@ -1,13 +1,24 @@
+import { useState } from "react";
 import { Tabela } from "../../Tabelas";
 import { Container_Comments } from "./styled";
+import { Modal } from "../../Modal/Modal-Comentarios";
 
 export const Comments = () => {
+  const [modalOpen, setModalOpen] = useState(false);
+
   return (
     <Container_Comments>
       <h2 className="title">COMENTARIOS</h2>
       <div>
-        <button>adicionar</button>
+        <button
+          onClick={() => {
+            setModalOpen(true);
+          }}
+        >
+          adicionar
+        </button>
       </div>
+
       <Tabela
         titles={[
           "ID",
@@ -19,6 +30,7 @@ export const Comments = () => {
           "Botoes",
         ]}
       />
+      {modalOpen && <Modal setOpenModal={setModalOpen} />}
     </Container_Comments>
   );
 };
