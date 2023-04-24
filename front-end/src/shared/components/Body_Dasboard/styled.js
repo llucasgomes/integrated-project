@@ -8,4 +8,5 @@ export const Container_Body_Dashboard = styled.section`
   /* background-color: red; */
   font-size: 2rem;
   transition: 0.3s;
+  position: relative;
 `;
