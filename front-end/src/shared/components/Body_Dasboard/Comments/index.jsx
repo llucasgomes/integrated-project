@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { Tabela } from "../../Tabelas";
 import { Container_Comments } from "./styled";
-import { Modal } from "../../Modal/Modal-Comentarios";
+import { Modal } from "../../Modals/Modal-Comentarios";
 
 export const Comments = () => {
   const [modalOpen, setModalOpen] = useState(false);
