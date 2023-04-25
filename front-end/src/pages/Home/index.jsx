@@ -1,6 +1,7 @@
 import { Profile_Section } from "../../shared/components/Profile";
 import { Container_Home } from "./styled";
-import { Rotas_Home } from "../../routes";
+import { Navbar } from "../../shared/components/Navbar";
+import { Contente } from "../../shared/components/Body_Home";
 
 export const Home = () => {
   return (
@@ -10,7 +11,8 @@ export const Home = () => {
 
       {/* Seção da Direita */}
       <div className="container">
-        <Rotas_Home />
+        <Navbar />
+        <Contente />
       </div>
     </Container_Home>
   );
