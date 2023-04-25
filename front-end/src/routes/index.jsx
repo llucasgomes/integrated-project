@@ -1,56 +1,94 @@
-import { BrowserRouter, Route, Routes } from "react-router-dom";
-import { Navbar } from "../shared/components/Navbar";
-import { Contente } from "../shared/components/Body_Home";
+//Pagindas Principais
 import { Home, Page_Dashboard, Page_Login, Page_Register } from "../pages";
-import { Resume } from "../shared/components/Body_Home/Resume";
-import { Portifolio } from "../shared/components/Body_Home/Portifolio";
-import { Habilidades } from "../shared/components/Body_Home/Habilidades";
-import { Sobre } from "../shared/components/Body_Home/Sobre";
-import { Sidebar } from "../shared/components/Sidebar";
-import { Body_Dashboard } from "../shared/components/Body_Dasboard";
 
-export const Rotas_Home = () => {
-  return (
-    <>
-      <Navbar />
-      <Contente />
-    </>
-  );
-};
+import { createBrowserRouter } from "react-router-dom";
 
-export const Rotas_Dasboard = () => {
-  return (
-    <>
-      <Sidebar />
-      <Body_Dashboard />
-    </>
-  );
-};
+// Paginas Secundarias Home
+import {
+  Contato,
+  Habilidades,
+  Portifolio,
+  Resume,
+  Sobre,
+} from "../shared/components/Body_Home";
 
-export const Rotas = () => {
-  return (
-    <BrowserRouter>
-      <Routes>
-        <Route path="/" element={<Home />}>
-          <Route path={"*"} element={<Resume />} />
-          <Route path={"/portifolio"} element={<Portifolio />} />
-          <Route path={"/habilidades"} element={<Habilidades />} />
-          <Route path={"/sobre"} element={<Sobre />} />
-          <Route path={"/contato"} element={<Sobre />} />
-        </Route>
-        <Route path={"/login"} element={<Page_Login />} />
-        <Route path={"/register"} element={<Page_Register />} />
-        <Route path={"/dashboard"} element={<Page_Dashboard />}>
-          <Route path={"/dashboard"} element={"incial"} />
-          <Route path={"/dashboard/perfil"} element={"Perfil"} />
-          <Route path={"/dashboard/experiencias"} element={"expericcias"} />
-          <Route path={"/dashboard/educacao"} element={"educação"} />
-          <Route path={"/dashboard/projetos"} element={"projetos"} />
-          <Route path={"/dashboard/habilidades"} element={"Skills"} />
-          <Route path={"/dashboard/comentarios"} element={"comentarios"} />
-          <Route path={"/dashboard/sobre"} element={"Sobre"} />
-        </Route>
-      </Routes>
-    </BrowserRouter>
-  );
-};
+// Paginas Secundarias Dasboard
+import {
+  Bem_Vindo,
+  Comments,
+  D_Perfil,
+  Education,
+  Experiencia,
+  Projects,
+} from "../shared/components/Body_Dasboard";
+
+export const Rota = createBrowserRouter([
+  {
+    path: "/",
+    element: <Home />,
+    children: [
+      {
+        path: "/",
+        element: <Resume />,
+      },
+      {
+        path: "/portifolio",
+        element: <Portifolio />,
+      },
+      {
+        path: "/habilidades",
+        element: <Habilidades />,
+      },
+      {
+        path: "/comments",
+        element: <Sobre />,
+      },
+      {
+        path: "/contato",
+        element: <Contato />,
+      },
+    ],
+  },
+  {
+    path: "/login",
+    element: <Page_Login />,
+  },
+  {
+    path: "/register",
+    element: <Page_Register />,
+  },
+  {
+    path: "/dashboard",
+    element: <Page_Dashboard />,
+    children: [
+      {
+        path: "/dashboard/",
+        element: <Bem_Vindo />,
+      },
+      {
+        path: "/dashboard/perfil",
+        element: <D_Perfil />,
+      },
+      {
+        path: "/dashboard/experiencias",
+        element: <Experiencia />,
+      },
+      {
+        path: "/dashboard/educacao",
+        element: <Education />,
+      },
+      {
+        path: "/dashboard/projetos",
+        element: <Projects />,
+      },
+      {
+        path: "/dashboard/habilidades",
+        element: <Habilidades />,
+      },
+      {
+        path: "/dashboard/comentarios",
+        element: <Comments />,
+      },
+    ],
+  },
+]);
