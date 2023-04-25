@@ -19,12 +19,9 @@ export const Navbar = () => {
           <Link className="link" to={"habilidades"}>
             HABILIDADES
           </Link>
-          <Link className="link" to={"contato"}>
+          <Link className="link" to={"comments"}>
             COMENTARIOS
           </Link>
-          {/* <Link className="link" to={"sobre"}>
-            SOBRE
-          </Link> */}
           <Link className="link" to={"contato"}>
             CONTATO
           </Link>
