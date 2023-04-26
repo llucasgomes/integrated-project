@@ -1,12 +1,22 @@
+import { useState } from "react";
 import { Tabela } from "../../Tabelas";
+import { Modal_Habilidades } from "../../Modals/Modal-Habilidades";
 import { Container_Habilidades } from "./styled";
 
-export const Habilidades = () => {
+export const D_Habilidades = () => {
+  const [modalOpen, setModalOpen] = useState(false);
+
   return (
     <Container_Habilidades>
       <h2 className="title">Habilidades</h2>
       <div>
-        <button>adicionar</button>
+        <button
+          onClick={() => {
+            setModalOpen(true);
+          }}
+        >
+          adicionar
+        </button>
       </div>
       <Tabela
         titles={[
@@ -19,6 +29,7 @@ export const Habilidades = () => {
           "Botoes",
         ]}
       />
+      {modalOpen && <Modal_Habilidades setOpenModal={setModalOpen} />}
     </Container_Habilidades>
   );
 };

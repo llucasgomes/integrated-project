@@ -65,7 +65,8 @@ export const Modal_Educacao = ({ setOpenModal }) => {
           </button>
         </div>
         <div className="title">
-          <h1>😜 Inserir</h1>
+          <h1>Inserir</h1>
+          <br />
         </div>
         <div className="body">
           <Formik
@@ -77,6 +78,8 @@ export const Modal_Educacao = ({ setOpenModal }) => {
             <Form>
               <Row>
                 <Input name="instituicao" required />
+              </Row>
+              <Row>
                 <Input name="inicio" type="date" required />
                 <Input name="termino" type="date" required />
               </Row>

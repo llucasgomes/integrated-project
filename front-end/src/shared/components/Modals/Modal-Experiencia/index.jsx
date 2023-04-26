@@ -7,7 +7,7 @@ import * as Yup from "yup";
 export const Modal_Experiencia = ({ setOpenModal }) => {
   // Valores iniciais Formik
   const initialValues = {
-    instituicao: "",
+    empresa: "",
     cargo: "",
     inicio: "",
     termino: "",
@@ -15,7 +15,7 @@ export const Modal_Experiencia = ({ setOpenModal }) => {
   };
   //Validações YUP
   const validationSchema = Yup.object({
-    instituicao: Yup.string()
+    empresa: Yup.string()
       .min(3, "O campo deve ter no mínimo 3 caracteres")
       .required("Campo obrigatório"),
     inicio: Yup.date()
@@ -65,7 +65,8 @@ export const Modal_Experiencia = ({ setOpenModal }) => {
           </button>
         </div>
         <div className="title">
-          <h1>😜 Inserir</h1>
+          <h1>Inserir</h1>
+          <br />
         </div>
         <div className="body">
           <Formik
@@ -76,7 +77,10 @@ export const Modal_Experiencia = ({ setOpenModal }) => {
           >
             <Form>
               <Row>
-                <Input name="instituicao" required />
+                <Input name="empresa" required />
+              </Row>
+              <Row>
+                <Input name="cargo" required />
                 <Input name="inicio" type="date" required />
                 <Input name="termino" type="date" required />
               </Row>
