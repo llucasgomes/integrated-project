@@ -1,7 +1,7 @@
 import { Profile_Section } from "../../shared/components/Profile";
 import { Container_Home } from "./styled";
 import { Navbar } from "../../shared/components/Navbar";
-import { Contente } from "../../shared/components/Body_Home";
+import { Conteudo } from "../../shared/components/Body_Home/index.jsx";
 
 export const Home = () => {
   return (
@@ -11,8 +11,10 @@ export const Home = () => {
 
       {/* Seção da Direita */}
       <div className="container">
-        <Navbar />
-        <Contente />
+        <>
+          <Navbar />
+          <Conteudo />
+        </>
       </div>
     </Container_Home>
   );

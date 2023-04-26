@@ -1,4 +1,4 @@
-import { Body_Dashboard } from "../../shared/components/Body_Dasboard";
+import { Body_Dashboard } from "../../shared/components/Body_Dasboard/index.jsx";
 import { Sidebar } from "../../shared/components/Sidebar";
 import { Container_Dasboard } from "./styled";
 
