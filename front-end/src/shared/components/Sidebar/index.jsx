@@ -1,8 +1,15 @@
 import { Container_Sidebar } from "./styled";
 import Foto from "../../../assets/images/foto_perfil.png";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 export const Sidebar = () => {
+  const navigate = useNavigate();
+
+  //Funcao para deslogar
+  const handleGetOut = (rota) => {
+    confirm("Deseja mesmo sair Chefe?") ? navigate("/") : alert("Nao saiu");
+  };
+
   return (
     <Container_Sidebar>
       <img className="foto-perfil" src={Foto} alt="Foto de Perfil" />
@@ -19,18 +26,15 @@ export const Sidebar = () => {
         <Link to={"/dashboard/projetos"} className="list_item">
           Projetos
         </Link>
-        <Link to={"/dashboard/habilidades"} className="list_item">
+        <Link to={"/dashboard/skills"} className="list_item">
           Habilidades
         </Link>
         <Link to={"/dashboard/comentarios"} className="list_item">
           Comentarios
         </Link>
-        <Link to={"/dashboard/sobre"} className="list_item">
-          Sobre
-        </Link>
-        <Link to={""} className="list_item">
+        <a onClick={() => handleGetOut("/")} className="list_item">
           Sair
-        </Link>
+        </a>
       </ul>
     </Container_Sidebar>
   );
