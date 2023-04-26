@@ -16,6 +16,7 @@ import {
 import {
   Bem_Vindo,
   Comments,
+  D_Habilidades,
   D_Perfil,
   Education,
   Experiencia,
@@ -82,8 +83,8 @@ export const Rota = createBrowserRouter([
         element: <Projects />,
       },
       {
-        path: "/dashboard/habilidades",
-        element: <Habilidades />,
+        path: "/dashboard/skills",
+        element: <D_Habilidades />,
       },
       {
         path: "/dashboard/comentarios",
