@@ -1,10 +1,14 @@
+import { useState } from "react";
 import { Input } from "../../Input";
-import { Container_Modal, Row } from "./styled";
+import { Container_Image, Container_Modal, Row } from "./styled";
 
 import { Form, Formik } from "formik";
 import * as Yup from "yup";
+import Image_defalt from "./../../../../../public/perfil.jpg";
 
 export const Modal_Projetos = ({ setOpenModal }) => {
+  const [image, setImage] = useState("");
+
   // Valores iniciais Formik
   const initialValues = {
     title: "",
@@ -72,10 +76,19 @@ export const Modal_Projetos = ({ setOpenModal }) => {
           >
             <Form>
               <Row>
-                <img
-                  src="https://miro.medium.com/v2/resize:fit:1400/1*g09N-jl7JtVjVZGcd-vL2g.jpeg"
-                  alt=""
-                />
+                <Container_Image
+                  htmlFor="image"
+                  bg={image ? URL.createObjectURL(image) : Image_defalt}
+                >
+                  <input
+                    name="image"
+                    className="file"
+                    type="file"
+                    value=""
+                    onChange={(e) => setImage(e.target.files[0])}
+                    id="image"
+                  />
+                </Container_Image>
                 <Row flex={""}>
                   <Input name="title" required />
                   <Input name="gitHub" required />

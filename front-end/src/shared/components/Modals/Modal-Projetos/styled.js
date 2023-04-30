@@ -74,12 +74,25 @@ export const Row = styled.div`
   align-items: center;
   margin-bottom: 0.5rem;
   padding: 0 0.5rem;
-  img {
-    width: 10rem;
-  }
 
   @media (max-width: 550px) {
     display: block;
     flex-direction: column;
+  }
+`;
+
+// estilo da input imagem
+export const Container_Image = styled.label`
+  width: 20rem;
+  height: 10rem;
+  background: ${(props) => `url(${props.bg})`} center center no-repeat;
+  background-size: cover;
+
+  object-fit: fill;
+
+  cursor: pointer;
+
+  input[type="file"] {
+    display: none;
   }
 `;

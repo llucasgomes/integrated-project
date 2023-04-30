@@ -1,10 +1,15 @@
 import { Input } from "../../Input";
+import { Container_Image } from "../Modal-Projetos/styled";
 import { Container_Modal, Row } from "./styled";
+import Image_defalt from "./../../../../../public/perfil.jpg";
 
 import { Form, Formik } from "formik";
 import * as Yup from "yup";
+import { useState } from "react";
 
 export const Modal_Habilidades = ({ setOpenModal }) => {
+  const [image, setImage] = useState("");
+
   // Valores iniciais Formik
   const initialValues = {
     title: "",
@@ -52,9 +57,9 @@ export const Modal_Habilidades = ({ setOpenModal }) => {
             X
           </button>
         </div>
-        {/* <div className="title">
-          <h1>😜 Inserir</h1>
-        </div> */}
+        <div className="title">
+          <h1>Inserir</h1>
+        </div>
         <div className="body">
           <Formik
             initialValues={initialValues}
@@ -64,10 +69,19 @@ export const Modal_Habilidades = ({ setOpenModal }) => {
           >
             <Form>
               <Row width={15}>
-                <img
-                  src="https://miro.medium.com/v2/resize:fit:1400/1*g09N-jl7JtVjVZGcd-vL2g.jpeg"
-                  alt=""
-                />
+                <Container_Image
+                  htmlFor="image"
+                  bg={image ? URL.createObjectURL(image) : Image_defalt}
+                >
+                  <input
+                    name="image"
+                    className="file"
+                    type="file"
+                    value=""
+                    onChange={(e) => setImage(e.target.files[0])}
+                    id="image"
+                  />
+                </Container_Image>
                 <Row flex={"column"}>
                   <Input name="title" required />
                   <Input name="descricao" type="text" required />

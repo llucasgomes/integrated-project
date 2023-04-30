@@ -1,5 +1,6 @@
 import { Form, Formik } from "formik";
 import Foto from "../../../../assets/images/foto_perfil.png";
+import Image_defalt from "./../../../../../public/perfil.jpg";
 import { Input } from "../../Input";
 import {
   Button,
@@ -16,9 +17,11 @@ import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { Pencil } from "phosphor-react";
 import { useState } from "react";
+import { Container_Image } from "../../Modals/Modal-Projetos/styled";
 
 export const D_Perfil = () => {
   const [job, setJob] = useState(["CLT", "Freelance"]);
+  const [image, setImage] = useState("");
 
   // Valores iniciais Formik
   const initialValues = {
@@ -84,10 +87,20 @@ export const D_Perfil = () => {
         >
           <Form>
             <RowImage>
-              <img className="foto-perfil" src={Foto} alt="Foto de Perfil" />{" "}
-              <div className="btn-editar">
-                <Pencil size={20} weight="bold" />
-              </div>
+              {/* <img className="foto-perfil" src={Foto} alt="Foto de Perfil" />{" "} */}
+              <Container_Image
+                htmlFor="image"
+                bg={image ? URL.createObjectURL(image) : Image_defalt}
+              >
+                <input
+                  name="image"
+                  className="file"
+                  type="file"
+                  value=""
+                  onChange={(e) => setImage(e.target.files[0])}
+                  id="image"
+                />
+              </Container_Image>
             </RowImage>
             <Row>
               <Input name="firstName" label="Nome" required />
