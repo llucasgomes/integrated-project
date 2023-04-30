@@ -5,7 +5,7 @@
 
 ---
 
-Para desenvolver uma <strong>Pagina Web</strong> utilizei <strong>ReactJS </strong>e<strong> Styled Components</strong>, com o intuito de praticar o que venho estudando atualmente.
+Para desenvolver esta <strong>Pagina Web</strong> utilizei <strong>ReactJS </strong>e<strong> Styled Components</strong>, com o intuito de praticar o que venho estudando atualmente.
 
 Para gerar a estrutura foi utilizado:
 
@@ -17,7 +17,6 @@ Foi utilizado as seguintes dependencias abaixo:
 - <strong>react-router-dom</strong>
 - <strong>react-toastify</strong>
 - <strong>styled-components</strong>
-- <strong>react-modal</strong>
 - <strong>formik + yup</strong>
 - <strong>Hooks</strong>
 
