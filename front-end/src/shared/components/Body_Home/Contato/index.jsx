@@ -18,7 +18,7 @@ export const Contato = () => {
 
         <div className="info">
           <Link
-            to={"https://www.google.com.br"}
+            to={"https://github.com/llucasgomes"}
             className="cartao_link"
             target="_blank"
           >
@@ -28,7 +28,7 @@ export const Contato = () => {
           <Link
             className="cartao_link"
             target="_blank"
-            to={"https://www.google.com.br"}
+            to={"https://www.linkedin.com/in/llucasgomess/"}
           >
             <LinkedinLogo size={56} weight="regular" />
           </Link>
@@ -36,7 +36,9 @@ export const Contato = () => {
           <Link
             className="cartao_link"
             target="_blank"
-            to={"https://www.google.com.br"}
+            to={
+              "https://wa.me/5592988471665?text=Ola+podemos+conversar%3F+Adorei+seu+portiflio"
+            }
           >
             <WhatsappLogo size={56} weight="regular" />
           </Link>
@@ -44,7 +46,7 @@ export const Contato = () => {
           <Link
             className="cartao_link"
             target="_blank"
-            to={"https://www.google.com.br"}
+            to={"https://www.instagram.com/lluca_sgomess/"}
           >
             <InstagramLogo size={56} weight="regular" />
           </Link>
