@@ -1,14 +1,18 @@
+import { useContext } from "react";
+import { API } from "../../../services/api";
 import { Input } from "../../Input";
 import { Container_Modal, Row } from "./styled";
 
 import { Form, Formik } from "formik";
 import * as Yup from "yup";
+import { DataContext } from "../../../contexts/DataContext";
+import { newData } from "../../../functions";
 
 export const Modal_Educacao = ({ setOpenModal }) => {
+  const { setIsFetching } = useContext(DataContext);
   // Valores iniciais Formik
   const initialValues = {
     instituicao: "",
-    cargo: "",
     inicio: "",
     termino: "",
     descricao: "",
@@ -21,15 +25,10 @@ export const Modal_Educacao = ({ setOpenModal }) => {
     inicio: Yup.date()
       .max(new Date(), "Não é possível incluir uma data futura")
       .required("Campo obrigatório"),
-    termino: Yup.date()
-      .max(new Date(), "Não é possível incluir uma data futura")
-      .required("Campo obrigatório"),
+
     descricao: Yup.string()
       .min(3, "O campo deve ter no mínimo 3 caracteres")
       .max(150, "O campo deve ter no maximo 150 caracteres")
-      .required("Campo obrigatório"),
-    cargo: Yup.string()
-      .min(3, "O campo deve ter no mínimo 3 caracteres")
       .required("Campo obrigatório"),
   });
 
@@ -46,10 +45,28 @@ export const Modal_Educacao = ({ setOpenModal }) => {
       theme: "light",
     });
 
+  // const newData = (data) => {
+  //   let date = data.slice(0, 10);
+
+  //   return (date = date.split("-").reverse().join("-"));
+  // };
+
   //Envio do formulario
   const handleSubmit = (values, { setSubmitting, resetForm }) => {
-    // notify();
-    // resetForm();
+    API.post("/education", {
+      course: values.instituicao,
+      start_date: newData(values.inicio),
+      end_date: values.termino ? newData(values.termino0) : "Atual",
+      description: values.descricao,
+    })
+      .then((res) => {
+        console.log(res);
+        setIsFetching(true);
+        setOpenModal(false);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
     setSubmitting(false);
   };
   return (
@@ -75,30 +92,34 @@ export const Modal_Educacao = ({ setOpenModal }) => {
             onSubmit={handleSubmit}
             enableReinitialize
           >
-            <Form>
-              <Row>
-                <Input name="instituicao" required />
-              </Row>
-              <Row>
-                <Input name="inicio" type="date" required />
-                <Input name="termino" type="date" required />
-              </Row>
-              <Row height={"textArea"}>
-                <Input name="descricao" type="text" required />
-              </Row>
-            </Form>
+            {({ values, isSubmitting }) => (
+              <Form>
+                <Row>
+                  <Input name="instituicao" required />
+                </Row>
+                <Row>
+                  <Input name="inicio" type="date" required />
+                  <Input name="termino" type="date" required />
+                </Row>
+                <Row height={"textArea"}>
+                  <Input name="descricao" type="text" required />
+                </Row>
+                <div className="footer">
+                  <button
+                    onClick={() => {
+                      setOpenModal(false);
+                    }}
+                    id="cancelBtn"
+                  >
+                    Cancel
+                  </button>
+                  <button type="submit" disabled={isSubmitting}>
+                    Salvar
+                  </button>
+                </div>
+              </Form>
+            )}
           </Formik>
-        </div>
-        <div className="footer">
-          <button
-            onClick={() => {
-              setOpenModal(false);
-            }}
-            id="cancelBtn"
-          >
-            Cancel
-          </button>
-          <button>Continue</button>
         </div>
       </div>
     </Container_Modal>
