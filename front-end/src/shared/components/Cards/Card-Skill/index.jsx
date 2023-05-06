@@ -5,13 +5,11 @@ export const Card_Skill = ({ image, title, description }) => {
     <Container_Card_Skill>
       <img
         className="image"
-        src="https://portifolio-2-0-ehvgjudyl-llucasgomes.vercel.app/assets/images/skills/logo-html5.png"
-        alt="Image HTML5"
+        src={`data:image/png;base64,${image}`}
+        alt={`Imagem ${title}`}
       />
-      <h2 className="title">HTML</h2>
-      <p className="description">
-        Tenho conhecimento de como estruturar o HTML usando tags semânticas
-      </p>
+      <h2 className="title">{title}</h2>
+      <p className="description">{description}</p>
     </Container_Card_Skill>
   );
 };
