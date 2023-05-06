@@ -14,12 +14,13 @@ export const DataContextProvider = ({ children }) => {
   const [experience, setExperience] = useState([]);
   const [profile, setProfile] = useState([]);
   const [comments, setComments] = useState([]);
-  const [isFetching, setIsFetching] = useState(true);
+  const [isFetching, setIsFetching] = useState(false);
 
   //LISTAR  - GETS ==============================================
   //GET SKILLS
   useEffect(() => {
-    //conexao com a API
+    // conexao com a API
+
     API.get("/skills")
       .then((response) => setSkills(response.data))
       .catch((err) => {
@@ -28,7 +29,9 @@ export const DataContextProvider = ({ children }) => {
       .finally(() => {
         setIsFetching(false);
       });
-  }, [skills]);
+
+    setIsFetching(false);
+  }, [isFetching]);
 
   //GET EDUCATION
   useEffect(() => {
@@ -41,12 +44,12 @@ export const DataContextProvider = ({ children }) => {
       .finally(() => {
         setIsFetching(false);
       });
-  }, [education]);
+  }, [isFetching]);
 
   //GET PROJECTS
   useEffect(() => {
     //conexao com a API
-    API.get("/projects")
+    API.get("/project")
       .then((response) => setProjects(response.data))
       .catch((err) => {
         console.error("ops! ocorreu um erro" + err);
@@ -54,7 +57,7 @@ export const DataContextProvider = ({ children }) => {
       .finally(() => {
         setIsFetching(false);
       });
-  }, [projects]);
+  }, [isFetching]);
 
   //GET EXPERIENCE
   useEffect(() => {
@@ -67,7 +70,7 @@ export const DataContextProvider = ({ children }) => {
       .finally(() => {
         setIsFetching(false);
       });
-  }, [experience]);
+  }, [isFetching]);
 
   //GET PROFILE
   useEffect(() => {
@@ -80,24 +83,31 @@ export const DataContextProvider = ({ children }) => {
       .finally(() => {
         setIsFetching(false);
       });
-  }, [profile]);
+  }, [isFetching]);
 
   //GET COMMENTS
-  useEffect(() => {
-    //conexao com a API
-    API.get("/comments")
-      .then((response) => setComments(response.data))
-      .catch((err) => {
-        console.error("ops! ocorreu um erro" + err);
-      })
-      .finally(() => {
-        setIsFetching(false);
-      });
-  }, [comments]);
+  // useEffect(() => {
+  //   //conexao com a API
+  //   API.get("/comments")
+  //     .then((response) => setComments(response.data))
+  //     .catch((err) => {
+  //       console.error("ops! ocorreu um erro" + err);
+  //     })
+  //     .finally(() => {
+  //       setIsFetching(false);
+  //     });
+  // }, [isFetching]);
 
   return (
     <DataContext.Provider
-      value={{ skills, education, projects, profile, experience, isFetching }}
+      value={{
+        skills,
+        education,
+        projects,
+        profile,
+        experience,
+        setIsFetching,
+      }}
     >
       {children}
     </DataContext.Provider>
