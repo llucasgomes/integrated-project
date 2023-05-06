@@ -1,7 +1,7 @@
 import { useState } from "react";
-import { Tabela } from "../../Tabelas";
 import { Container_Projects } from "./styled";
 import { Modal_Projetos } from "../../Modals/Modal-Projetos";
+import { Table_Projetos } from "../../Tabelas/Projetos";
 
 export const Projects = () => {
   const [modalOpen, setModalOpen] = useState(false);
@@ -18,16 +18,8 @@ export const Projects = () => {
           adicionar
         </button>
       </div>
-      <Tabela
-        titles={[
-          "ID",
-          "Instituição",
-          "Inicio",
-          "Termino",
-          "Descrição",
-          "Botoes",
-          "Botoes",
-        ]}
+      <Table_Projetos
+        titles={["ID", "Image", "Titulo", "Descricao","Links"]}
       />
       {modalOpen && <Modal_Projetos setOpenModal={setModalOpen} />}
     </Container_Projects>
