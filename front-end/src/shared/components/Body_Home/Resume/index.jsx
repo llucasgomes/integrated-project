@@ -1,7 +1,10 @@
+import { useContext } from "react";
 import { Card_Resume } from "../../Cards/Card-Resume";
 import { Container_Resume } from "./styled";
+import { DataContext } from "../../../contexts/DataContext";
 
 export const Resume = () => {
+  const { education } = useContext(DataContext);
   return (
     <Container_Resume>
       <h1 className="title">Resumo</h1>
@@ -23,18 +26,14 @@ export const Resume = () => {
         </div>
         <div className="container-rigth">
           <h2 className="sub_title">Educação</h2>
-          <Card_Resume
-            empresa={"Stack X - DEV FULL STACK JR"}
-            ano_inicio={`Dezembro de 2021`}
-            ano_atual={""}
-            descricao={`Curso de Programação online Full Stack Jr, que te ensina desde o basico ao avançado, nas tecnologias que estao mais engajadas no mercado.`}
-          />
-          <Card_Resume
-            empresa={"Dev Quest"}
-            ano_inicio={`Março de 2022`}
-            ano_atual={""}
-            descricao={`O DevQuest é um treinamento web full stack que te leva do zero até sua primera vaga na área de programação em até 7 meses.`}
-          />
+          {education.map((item) => (
+            <Card_Resume
+              empresa={item.course}
+              ano_inicio={item.start_date}
+              ano_atual={item.end_date}
+              descricao={item.description}
+            />
+          ))}
         </div>
       </section>
     </Container_Resume>
