@@ -1,7 +1,7 @@
 import { useState } from "react";
-import { Tabela } from "../../Tabelas";
 import { Container_Education } from "./styled";
 import { Modal_Educacao } from "../../Modals/Modal-Educacao";
+import { Table_Education } from "../../Tabelas/Education";
 
 export const Education = () => {
   const [modalOpen, setModalOpen] = useState(false);
@@ -17,16 +17,8 @@ export const Education = () => {
           adicionar
         </button>
       </div>
-      <Tabela
-        titles={[
-          "ID",
-          "Instituição",
-          "Inicio",
-          "Termino",
-          "Descrição",
-          "Botoes",
-          "Botoes",
-        ]}
+      <Table_Education
+        titles={["ID", "Instituição", "Inicio", "Termino", "Descrição"]}
       />
       {modalOpen && <Modal_Educacao setOpenModal={setModalOpen} />}
     </Container_Education>
