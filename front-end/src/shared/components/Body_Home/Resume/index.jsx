@@ -4,7 +4,7 @@ import { Container_Resume } from "./styled";
 import { DataContext } from "../../../contexts/DataContext";
 
 export const Resume = () => {
-  const { education } = useContext(DataContext);
+  const { education, experience } = useContext(DataContext);
   return (
     <Container_Resume>
       <h1 className="title">Resumo</h1>
@@ -17,20 +17,31 @@ export const Resume = () => {
       <section className="container-resume">
         <div className="container-left">
           <h2 className="sub_title">Experiência</h2>
-          <Card_Resume
-            empresa={"Stack X - MONITOR FRONT-END "}
-            ano_inicio={`Abril de 2022`}
-            ano_atual={""}
-            descricao={`Auxilio os Mentores e Professores a retirar as duvidas dos alunos após as aulas, ajudo a criar exercicios basicos de front-end para os novos alunos`}
-          />
+          {experience.map((item) => (
+            <Card_Resume
+              empresa={item.company}
+              cargo={item.office}
+              ano_inicio={item.start_date.slice(3)}
+              ano_atual={
+                item.end_date == "Atual"
+                  ? item.end_date
+                  : item.end_date.slice(3)
+              }
+              descricao={item.description}
+            />
+          ))}
         </div>
         <div className="container-rigth">
           <h2 className="sub_title">Educação</h2>
           {education.map((item) => (
             <Card_Resume
               empresa={item.course}
-              ano_inicio={item.start_date}
-              ano_atual={item.end_date}
+              ano_inicio={item.start_date.slice(3)}
+              ano_atual={
+                item.end_date == "Atual"
+                  ? item.end_date
+                  : item.end_date.slice(3)
+              }
               descricao={item.description}
             />
           ))}
