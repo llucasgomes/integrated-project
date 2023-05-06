@@ -45,12 +45,6 @@ export const Modal_Educacao = ({ setOpenModal }) => {
       theme: "light",
     });
 
-  // const newData = (data) => {
-  //   let date = data.slice(0, 10);
-
-  //   return (date = date.split("-").reverse().join("-"));
-  // };
-
   //Envio do formulario
   const handleSubmit = (values, { setSubmitting, resetForm }) => {
     API.post("/education", {
