@@ -14,6 +14,7 @@ export const Input = ({
   label,
   required,
   dataList,
+  valor,
   ...props
 }) => {
   return (
@@ -27,6 +28,7 @@ export const Input = ({
         name={name}
         type={type}
         list={label}
+        value={valor}
         {...props}
       />
       {label == "Job" ? (
