@@ -4,7 +4,7 @@ import { useContext } from "react";
 import { DataContext } from "../../../contexts/DataContext";
 import { API } from "../../../services/api";
 
-export const Table_Experience = ({ titles }) => {
+export const Table_Experience = ({ titles, modal, setEditar, searchID }) => {
   const { experience, setIsFetching } = useContext(DataContext);
 
   function handleDelete(id) {
@@ -14,6 +14,12 @@ export const Table_Experience = ({ titles }) => {
         console.error("ops! ocorreu um erro" + err);
       });
   }
+
+  const abrirModal = (id) => {
+    searchID(id);
+    setEditar(true);
+    modal(true);
+  };
 
   return (
     <Container_Tabela>
@@ -36,7 +42,7 @@ export const Table_Experience = ({ titles }) => {
               <td>{item.end_date.slice(0, 10)}</td>
               <td>{item.description.slice(0, 24) + "..."}</td>
               <td className="btn">
-                <button onClick={() => alert("editar")} className="editar">
+                <button onClick={() => abrirModal(item.id)} className="editar">
                   <Pencil size={16} weight="light" />
                 </button>
                 <button
