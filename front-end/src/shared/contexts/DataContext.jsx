@@ -13,8 +13,8 @@ export const DataContextProvider = ({ children }) => {
   const [projects, setProjects] = useState([]);
   const [experience, setExperience] = useState([]);
   const [profile, setProfile] = useState([]);
-  const [comments, setComments] = useState([]);
-  const [isFetching, setIsFetching] = useState(false);
+  // const [comments, setComments] = useState([]);
+  const [isFetching, setIsFetching] = useState(true);
 
   //LISTAR  - GETS ==============================================
   //GET SKILLS
