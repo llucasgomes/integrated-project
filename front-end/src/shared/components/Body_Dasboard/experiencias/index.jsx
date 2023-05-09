@@ -6,6 +6,8 @@ import { Table_Experience } from "../../Tabelas/Experience";
 
 export const Experiencia = () => {
   const [modalOpen, setModalOpen] = useState(false);
+  const [editar, setEditar] = useState(false);
+  const [id, setId] = useState("");
 
   return (
     <Container_Experincia>
@@ -21,8 +23,18 @@ export const Experiencia = () => {
       </div>
       <Table_Experience
         titles={["ID", "Empresa", "Cargo", "Inicio", "Termino", "Descrição"]}
+        modal={setModalOpen}
+        setEditar={setEditar}
+        searchID={setId}
       />
-      {modalOpen && <Modal_Experiencia setOpenModal={setModalOpen} />}
+      {modalOpen && (
+        <Modal_Experiencia
+          setOpenModal={setModalOpen}
+          editar={editar}
+          setEditar={setEditar}
+          id={id}
+        />
+      )}
     </Container_Experincia>
   );
 };

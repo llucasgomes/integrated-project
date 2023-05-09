@@ -5,6 +5,9 @@ import { Table_Education } from "../../Tabelas/Education";
 
 export const Education = () => {
   const [modalOpen, setModalOpen] = useState(false);
+  const [editar, setEditar] = useState(false);
+  const [id, setId] = useState("");
+
   return (
     <Container_Education>
       <h2 className="title">Educação</h2>
@@ -19,8 +22,18 @@ export const Education = () => {
       </div>
       <Table_Education
         titles={["ID", "Instituição", "Inicio", "Termino", "Descrição"]}
+        modal={setModalOpen}
+        setEditar={setEditar}
+        searchID={setId}
       />
-      {modalOpen && <Modal_Educacao setOpenModal={setModalOpen} />}
+      {modalOpen && (
+        <Modal_Educacao
+          setOpenModal={setModalOpen}
+          editar={editar}
+          setEditar={setEditar}
+          id={id}
+        />
+      )}
     </Container_Education>
   );
 };
