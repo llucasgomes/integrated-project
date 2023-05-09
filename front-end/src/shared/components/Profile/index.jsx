@@ -1,12 +1,12 @@
 import { Container_Profile } from "./styled";
-import Foto from "../../../assets/images/foto_perfil.png";
 import { FileArrowDown } from "phosphor-react";
-import { useContext } from "react";
+import { useContext, useEffect, useState } from "react";
 import { DataContext } from "../../contexts/DataContext";
 import { newData } from "../../functions";
+import { API } from "../../services/api";
 
 export const Profile_Section = () => {
-  const { profile } = useContext(DataContext);
+  const { profile, setIsFetching, setProfile } = useContext(DataContext);
 
   return (
     <Container_Profile>

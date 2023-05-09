@@ -17,6 +17,19 @@ export const DataContextProvider = ({ children }) => {
   const [isFetching, setIsFetching] = useState(true);
 
   //LISTAR  - GETS ==============================================
+  //GET PROFILE
+  useEffect(() => {
+    //conexao com a API
+    API.get("/profile")
+      .then(async (response) => setProfile(response.data))
+      .catch((err) => {
+        console.error("ops! ocorreu um erro" + err);
+      })
+      .finally(() => {
+        setIsFetching(false);
+      });
+  }, []);
+
   //GET SKILLS
   useEffect(() => {
     // conexao com a API
@@ -29,9 +42,7 @@ export const DataContextProvider = ({ children }) => {
       .finally(() => {
         setIsFetching(false);
       });
-
-    setIsFetching(false);
-  }, [isFetching]);
+  }, []);
 
   //GET EDUCATION
   useEffect(() => {
@@ -57,7 +68,7 @@ export const DataContextProvider = ({ children }) => {
       .finally(() => {
         setIsFetching(false);
       });
-  }, [isFetching]);
+  }, []);
 
   //GET EXPERIENCE
   useEffect(() => {
@@ -70,20 +81,7 @@ export const DataContextProvider = ({ children }) => {
       .finally(() => {
         setIsFetching(false);
       });
-  }, [isFetching]);
-
-  //GET PROFILE
-  useEffect(() => {
-    //conexao com a API
-    API.get("/profile")
-      .then((response) => setProfile(response.data))
-      .catch((err) => {
-        console.error("ops! ocorreu um erro" + err);
-      })
-      .finally(() => {
-        setIsFetching(false);
-      });
-  }, [isFetching]);
+  }, []);
 
   //GET COMMENTS
   // useEffect(() => {
@@ -106,6 +104,7 @@ export const DataContextProvider = ({ children }) => {
         projects,
         profile,
         experience,
+        isFetching,
         setIsFetching,
       }}
     >
