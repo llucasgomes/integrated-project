@@ -19,9 +19,9 @@ export const Navbar = () => {
           <Link className="link" to={"habilidades"}>
             HABILIDADES
           </Link>
-          <Link className="link" to={"comments"}>
+          {/* <Link className="link" to={"comments"}>
             COMENTARIOS
-          </Link>
+          </Link> */}
           <Link className="link" to={"contato"}>
             CONTATO
           </Link>
