@@ -45,10 +45,25 @@ export const Page_Login = () => {
   const handleSubmit = (values, { setSubmitting, resetForm }) => {
     //axios
     //direcionando para a pagina de adm
-    navigate("/dashboard");
 
-    resetForm();
-    setSubmitting(false);
+    if (
+      values.email == "lucas.gomes.manaus@gmail.com" &&
+      values.senha == "fada123"
+    ) {
+      navigate("/dashboard");
+    } else {
+      toast.error("Email ou Senha invaliudos!", {
+        position: "top-center",
+        autoClose: 2000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "light",
+      });
+      setSubmitting(false);
+    }
   };
 
   const dashboard = () => {};
@@ -74,7 +89,7 @@ export const Page_Login = () => {
                 <Button type="submit" disabled={isSubmitting}>
                   Login
                 </Button>
-                <Row>
+                {/* <Row>
                   <p>
                     Esqueceu sua Senha?{" "}
                     <Link to={"/password-recovery"}>Clique aqui</Link>
@@ -82,7 +97,7 @@ export const Page_Login = () => {
                   <p>
                     <Link to={"/register"}>Criar conta</Link>
                   </p>
-                </Row>
+                </Row> */}
               </Footer>
             </Form>
           )}
