@@ -1,6 +1,4 @@
 import { Form, Formik } from "formik";
-import Foto from "../../../../assets/images/foto_perfil.png";
-import Image_defalt from "./../../../../../public/perfil.jpg";
 import { Input } from "../../Input";
 import {
   Button,
@@ -9,6 +7,7 @@ import {
   Footer,
   Row,
   RowImage,
+  Container_Image,
 } from "./styled";
 
 import * as Yup from "yup";
@@ -16,23 +15,25 @@ import * as Yup from "yup";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { Pencil } from "phosphor-react";
-import { useState } from "react";
-import { Container_Image } from "../../Modals/Modal-Projetos/styled";
+import { useContext, useState } from "react";
+import { DataContext } from "../../../contexts/DataContext";
+import { API } from "../../../services/api";
 
 export const D_Perfil = () => {
+  const { profile } = useContext(DataContext);
   const [job, setJob] = useState(["CLT", "Freelance"]);
-  const [image, setImage] = useState("");
+  const [image, setImage] = useState(profile[0].image);
+  const [previwImage, setPreviwImage] = useState("");
 
   // Valores iniciais Formik
   const initialValues = {
-    firstName: "",
-    middleName: "",
-    lastName: "",
-    email: "",
-    subject: "",
-    birthday: "",
-    phone: "",
-    job: "",
+    firstName: profile[0].name,
+    middleName: profile[0].middle_name,
+    lastName: profile[0].last_name,
+    email: profile[0].email,
+    birthday: profile[0].birthday.slice(0, 10),
+    phone: profile[0].phone,
+    job: profile[0].job,
   };
   //Validações YUP
   const validationSchema = Yup.object({
@@ -46,9 +47,6 @@ export const D_Perfil = () => {
       .min(3, "O campo deve ter no mínimo 3 caracteres")
       .required("Campo obrigatório"),
     email: Yup.string().email("E-mail inválido").required("Campo obrigatório"),
-    subject: Yup.string()
-      .min(3, "O campo deve ter no mínimo 3 caracteres")
-      .required("Campo obrigatório"),
     birthday: Yup.date()
       .max(new Date(), "Não é possível incluir uma data futura")
       .required("Campo obrigatório"),
@@ -69,10 +67,31 @@ export const D_Perfil = () => {
       theme: "light",
     });
 
-  //Envio do Email
-  const handleSubmit = (values, { setSubmitting, resetForm }) => {
-    // notify();
-    // resetForm();
+  //Edição de dados do perfil
+  const handleSubmit = async (values, { setSubmitting, resetForm }) => {
+    try {
+      const formData = new FormData();
+
+      formData.append("image", previwImage);
+      formData.append("name", values.firstName);
+      formData.append("middle_name", values.middleName);
+      formData.append("last_name", values.lastName);
+      formData.append("birthday", values.birthday);
+      formData.append("job", values.job);
+      formData.append("phone", values.phone);
+      formData.append("email", values.email);
+
+      await API.put("/profile/1", formData, {
+        headers: {
+          "Content-Type": "multipart/form-data",
+        },
+      });
+
+      console.log("Edição realizada com sucesso com sucesso!");
+    } catch (error) {
+      console.error("Erro ao enviar o arquivo:", error);
+    }
+
     setSubmitting(false);
   };
   return (
@@ -82,43 +101,55 @@ export const D_Perfil = () => {
         <Formik
           initialValues={initialValues}
           validationSchema={validationSchema}
+          enctype={"multipart/form-data"}
           onSubmit={handleSubmit}
           enableReinitialize
         >
-          <Form>
-            <RowImage>
-              {/* <img className="foto-perfil" src={Foto} alt="Foto de Perfil" />{" "} */}
-              <Container_Image
-                htmlFor="image"
-                bg={image ? URL.createObjectURL(image) : Image_defalt}
-              >
-                <input
-                  name="image"
-                  className="file"
-                  type="file"
-                  value=""
-                  onChange={(e) => setImage(e.target.files[0])}
-                  id="image"
-                />
-              </Container_Image>
-            </RowImage>
-            <Row>
-              <Input name="firstName" label="Nome" required />
-              <Input name="middleName" label="Nome do Meio" required />
-              <Input name="lastName" label="Ultimo Nome" required />
-            </Row>
-            <Row>
-              <Input name="birthday" type="date" required />
-              <Input name="job" label={"Job"} dataList={job} required />
-              <Input name="phone" required />
-            </Row>
-            <Row>
-              <Input name="email" required />
-            </Row>
-            <Footer>
-              <Button type="submit">Salvar</Button>
-            </Footer>
-          </Form>
+          {({ values, isSubmitting }) => (
+            <Form>
+              <RowImage>
+                <img
+                  className="foto-perfil"
+                  src={
+                    previwImage
+                      ? URL.createObjectURL(previwImage)
+                      : `data:image/png;base64,${image}`
+                  }
+                  alt="Foto de Perfil"
+                />{" "}
+                <Container_Image htmlFor="image">
+                  <input
+                    name="image"
+                    className="file"
+                    type="file"
+                    value=""
+                    onChange={(e) => setPreviwImage(e.target.files[0])}
+                    id="image"
+                  />
+                  <Pencil />
+                </Container_Image>
+              </RowImage>
+              <Row>
+                <Input name="firstName" label="Nome" required />
+                <Input name="middleName" label="Nome do Meio" required />
+                <Input name="lastName" label="Ultimo Nome" required />
+              </Row>
+              <Row>
+                <Input name="birthday" type="date" required />
+                <Input name="job" label={"Job"} dataList={job} required />
+                <Input name="phone" required />
+              </Row>
+              <Row>
+                <Input name="email" required />
+              </Row>
+
+              <Footer>
+                <Button type="submit" disabled={isSubmitting}>
+                  Salvar
+                </Button>
+              </Footer>
+            </Form>
+          )}
         </Formik>
       </Container_Form>
     </Container_Perfil>

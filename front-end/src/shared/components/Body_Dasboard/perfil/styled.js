@@ -45,29 +45,36 @@ export const RowImage = styled.div`
   margin-bottom: 0.5rem;
   padding: 0 0.5rem;
   position: relative;
+
   .foto-perfil {
-    width: 10rem;
+    width: 15rem;
     border-radius: 0.8rem;
     margin-bottom: 1rem;
+    object-fit: fill;
     position: relative;
-  }
-  .btn-editar {
-    position: absolute;
-    background-color: #ffffff;
-    width: 3rem;
-    height: 3rem;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    border-radius: 50%;
-    top: -1.5rem;
-    left: calc(50% + 3rem);
-    cursor: pointer;
   }
 
   @media (max-width: 550px) {
     display: block;
     flex-direction: column;
+  }
+`;
+
+export const Container_Image = styled.label`
+  width: 3rem;
+  height: 3rem;
+  border-radius: 50%;
+  background-color: red;
+  position: absolute;
+  top: -1.5rem;
+  left: calc(60% + 2rem);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+
+  input[type="file"] {
+    display: none;
   }
 `;
 
