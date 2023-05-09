@@ -96,3 +96,18 @@ export const Container_Image = styled.label`
     display: none;
   }
 `;
+export const Botao_Image = styled.button`
+  width: 3rem;
+  height: 3rem;
+  /* background: ${(props) => `url(${props.bg})`} center center no-repeat; */
+  /* background-size: cover; */
+  background-color: red;
+
+  /* object-fit: fill; */
+
+  cursor: pointer;
+
+  input[type="file"] {
+    display: none;
+  }
+`;

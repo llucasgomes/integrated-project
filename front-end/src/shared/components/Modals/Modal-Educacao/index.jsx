@@ -8,7 +8,7 @@ import * as Yup from "yup";
 import { DataContext } from "../../../contexts/DataContext";
 import { newData } from "../../../functions";
 
-export const Modal_Educacao = ({ setOpenModal }) => {
+export const Modal_Educacao = ({ setOpenModal, editar, setEditar, id }) => {
   const { setIsFetching } = useContext(DataContext);
   // Valores iniciais Formik
   const initialValues = {
@@ -47,20 +47,39 @@ export const Modal_Educacao = ({ setOpenModal }) => {
 
   //Envio do formulario
   const handleSubmit = (values, { setSubmitting, resetForm }) => {
-    API.post("/education", {
-      course: values.instituicao,
-      start_date: newData(values.inicio),
-      end_date: values.termino ? newData(values.termino0) : "Atual",
-      description: values.descricao,
-    })
-      .then((res) => {
-        console.log(res);
-        setIsFetching(true);
-        setOpenModal(false);
+    if (!editar) {
+      API.post("/education", {
+        course: values.instituicao,
+        start_date: newData(values.inicio),
+        end_date: values.termino ? newData(values.termino) : "Atual",
+        description: values.descricao,
       })
-      .catch((error) => {
-        console.log(error);
-      });
+        .then((res) => {
+          // console.log(res);
+          setEditar(false);
+          setIsFetching(true);
+          setOpenModal(false);
+        })
+        .catch((error) => {
+          console.log(error);
+        });
+    } else {
+      API.put(`/education/${id}`, {
+        course: values.instituicao,
+        start_date: newData(values.inicio),
+        end_date: values.termino ? newData(values.termino) : "Atual",
+        description: values.descricao,
+      })
+        .then((res) => {
+          // console.log(res);
+          setEditar(false);
+          setIsFetching(true);
+          setOpenModal(false);
+        })
+        .catch((error) => {
+          console.log(error);
+        });
+    }
     setSubmitting(false);
   };
   return (
@@ -69,6 +88,7 @@ export const Modal_Educacao = ({ setOpenModal }) => {
         <div className="titleCloseBtn">
           <button
             onClick={() => {
+              setEditar(false);
               setOpenModal(false);
             }}
           >
@@ -76,7 +96,7 @@ export const Modal_Educacao = ({ setOpenModal }) => {
           </button>
         </div>
         <div className="title">
-          <h1>Inserir</h1>
+          {editar ? <h1>Editar</h1> : <h1>Inserir</h1>}
           <br />
         </div>
         <div className="body">
@@ -99,16 +119,16 @@ export const Modal_Educacao = ({ setOpenModal }) => {
                   <Input name="descricao" type="text" required />
                 </Row>
                 <div className="footer">
-                  <button
+                  {/* <button
                     onClick={() => {
                       setOpenModal(false);
                     }}
                     id="cancelBtn"
                   >
                     Cancel
-                  </button>
+                  </button> */}
                   <button type="submit" disabled={isSubmitting}>
-                    Salvar
+                    {editar ? "Salvar Edição" : "Criar um novo"}
                   </button>
                 </div>
               </Form>
